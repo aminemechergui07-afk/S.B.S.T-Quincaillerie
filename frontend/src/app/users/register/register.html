@@ -1,0 +1,41 @@
+
+    <section class="container my-5 py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+          <div class="card p-4 shadow-sm border-0" style="border-radius: 12px; border-top: 5px solid var(--primary-color) !important;">
+            <h2 class="mb-4 text-center fw-bold"><i class="bi bi-person-plus-fill me-2"></i>Créer un compte</h2>
+            <form [formGroup]="registerForm"(ngSubmit)="save()">
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted fw-semibold">Name</label>
+                  <input formControlName="name" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': registerForm.controls['name'].invalid && registerForm.controls['name'].touched}" placeholder="Votre nom" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label text-muted fw-semibold">Last Name</label>
+                  <input formControlName = "lastName" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': registerForm.controls['lastName'].invalid && registerForm.controls['lastName'].touched}" placeholder="Votre prénom" required>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted fw-semibold">Telephone</label>
+                <input formControlName="tel" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': registerForm.controls['tel'].invalid && registerForm.controls['tel'].touched}" placeholder="Votre tele" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-muted fw-semibold">Email</label>
+                <input formControlName="email" type="email" [ngClass]="{'form-control px-3 py-2': true, 'error': registerForm.controls['email'].invalid && registerForm.controls['email'].touched}" placeholder="Votre email" required>
+              </div>
+              <div class="mb-4">
+                <label class="form-label text-muted fw-semibold">Password</label>
+                <input formControlName="password" type="password" [ngClass]="{'form-control px-3 py-2': true, 'error': registerForm.controls['password'].invalid && registerForm.controls['password'].touched}" placeholder="Votre mot de passe" required>
+              </div>
+              <button [disabled]="registerForm.invalid" type="submit" class="btn w-100 py-2 btn-add-to-cart" style="background-color: var(--primary-color); color: white; font-weight:600; border-radius:30px;">
+                S'inscrire
+              </button>
+
+              <div class="text-center mt-4">
+                <span class="text-muted">Vous avez déjà un compte ?</span> <a routerLink="/login" style="color:var(--primary-color); font-weight:bold; text-decoration:none;">Se connecter</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>

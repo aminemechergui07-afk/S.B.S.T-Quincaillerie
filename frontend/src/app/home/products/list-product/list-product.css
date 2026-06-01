@@ -1,0 +1,80 @@
+.list-product-section .list-product-grid {
+  row-gap: 1rem;
+}
+
+@media (max-width: 991.98px) {
+  .list-product-section .list-product-grid {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+    padding-left: 0 !important;
+    padding-bottom: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .list-product-section .list-product-grid .product-list-column {
+    flex: 0 0 33.3333%;
+    max-width: 33.3333%;
+    padding-left: 0.45rem !important;
+    padding-right: 0.45rem !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .list-product-section .list-product-grid {
+    display: grid !important;
+    grid-template-columns: repeat(6, 60vw) !important;
+    gap: 1rem !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    padding-bottom: 0.5rem !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .list-product-section .list-product-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+  }
+
+  .list-product-section .list-product-grid .product-list-column {
+    max-width: none !important;
+    width: 100% !important;
+    scroll-snap-align: start;
+    padding: 0 !important;
+  }
+
+  .list-product-section .product-card .card-img-top {
+    height: 145px;
+    padding: 0.85rem;
+  }
+
+  .list-product-section .product-card .card-body {
+    padding: 0.85rem 0.9rem;
+  }
+
+  .list-product-section .product-card .card-title {
+    font-size: 0.95rem;
+    min-height: 2.4rem;
+  }
+
+  .list-product-section .product-card .text-muted.small,
+  .list-product-section .product-card .badge.bg-success {
+    font-size: 0.72rem;
+  }
+
+  .list-product-section .product-card h4 {
+    font-size: 1.05rem;
+  }
+
+  .list-product-section .product-card .btn-add-to-cart {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+}

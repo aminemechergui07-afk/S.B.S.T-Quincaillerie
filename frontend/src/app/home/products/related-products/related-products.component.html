@@ -1,0 +1,35 @@
+<div class="related-products-section mt-5 pt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h3 class="fw-bold m-0">Vous aimerez aussi</h3>
+    <!-- Navigation Arrows -->
+    <div class="nav-arrows">
+      <button class="btn btn-outline-secondary rounded-circle me-2" >
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <button class="btn btn-outline-secondary rounded-circle" >
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Horizontal Scroll Container -->
+  <div class="products-scroll-container d-flex gap-4 pb-3 ps-2" #productScroll>
+   @for(all of allProducts; track all._id){
+      <div class="card h-100 product-card-minimal border-0 shadow-sm flex-shrink-0"  style="width: 280px;">
+      <div class="position-relative">
+        <img [src]=" 'http://127.0.0.1:5000/images/'+ all.images[0] " class="card-img-top p-3" alt="Produit">
+        <span class="badge bg-danger position-absolute top-0 start-0 m-3"> {{all.status}} </span>
+      </div>
+      <div class="card-body px-3 pt-0 pb-4 text-center d-flex flex-column">
+        <h6 class="card-title text-truncate mb-2" > {{all.name}} </h6>
+        <p class="card-text fw-bold text-primary mb-3"> {{all.prix}} TND</p>
+        <button (click)="addToCart(all)" class="btn btn-light btn-sm rounded-pill mt-auto border fw-medium w-100 add-btn">
+          <i class="bi bi-cart-plus me-1"></i> Ajouter rapide
+        </button>
+      </div>
+    </div>
+   }
+
+
+  </div>
+</div>

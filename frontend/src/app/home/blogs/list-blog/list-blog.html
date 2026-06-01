@@ -1,0 +1,52 @@
+<div class="container-fluid fouk blog-section mb-5">
+  <h1 class="mt-3 fw-bold px-3">Derniers blogs</h1>
+
+  <div class="row mt-5 blog-grid">
+    @for(blog of blogs; track blog._id){
+    <div class="item blog-column" data-delay="100">
+      <article class="blog-card">
+        <div class="blog-card__media">
+          <span class="blog-card__badge">Blog</span>
+          <img
+            class="blog-card__image"
+            [src]="'http://127.0.0.1:5000/images/' + blog.image"
+            [alt]="blog.title"
+          />
+        </div>
+
+        <div class="blog-card__content">
+          <p class="blog-card__eyebrow">Actualites & conseils</p>
+          <h2 class="blog-card__title">{{ blog.title }}</h2>
+
+          <div class="blog-card__footer">
+            <button [routerLink]="['/blogs/detailBlog/', blog._id]" class="voir-plus blog-card__cta">
+              Voir plus
+            </button>
+
+            @if(user?.role == 'admin'){
+            <div class="blog-card__actions">
+              <button
+                [routerLink]="['/blogs/update/' + blog._id]"
+                class="btn-action edit"
+                title="Modifier"
+                aria-label="Modifier le blog"
+              >
+                <i class="bi bi-pencil-fill"></i>
+              </button>
+              <button
+                (click)="deleteBlog(blog._id)"
+                class="btn-action delete"
+                title="Supprimer"
+                aria-label="Supprimer le blog"
+              >
+                <i class="bi bi-trash-fill"></i>
+              </button>
+            </div>
+          }
+          </div>
+        </div>
+      </article>
+    </div>
+    }
+  </div>
+</div>

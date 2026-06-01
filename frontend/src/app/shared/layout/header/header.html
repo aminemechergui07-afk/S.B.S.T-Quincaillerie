@@ -1,0 +1,204 @@
+  <div class="top-bar">
+    mar7ba bikom nass lkol f SBST Quincaillerie
+  </div>
+
+    <!----- 1. HEADER / NAVBAR ----->
+    <header id="mainHeader">
+      <!-- Main Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-main" id="navbarMain">
+        <div class="container-fluid">
+          <!-- Brand/Logo -->
+          <a routerLink="/home" class="navbar-brand">
+            <span class="logo-letter">SBST</span>Quincaillerie
+          </a>
+
+          <!-- Search Bar (Centered) -->
+          <div class="d-flex order-lg-2 my-2 my-lg-0 mx-auto">
+            <div class="input-group" style="max-width: 500px">
+              <input
+                type="text"
+                class="form-control navbar-search-input"
+                placeholder="Que cherchez-vous ?"
+                [(ngModel)]="searchQuery"
+                (keyup.enter)="onSearch()"
+              />
+              <button class="navbar-search-icon" type="button" (click)="onSearch()">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Right Nav Icons -->
+          <div class="d-flex align-items-center order-lg-3 ms-auto">
+            <a
+              class="nav-icon-link d-none d-lg-flex"
+              href="#"
+              title="Visitez-Nous"
+            >
+              <i class="bi bi-geo-alt-fill"></i>
+              <span class="nav-icon-label">Visitez-Nous</span>
+            </a>
+            <a
+              class="nav-icon-link"
+              href="https://wa.me/21654803503"
+              target="_blank"
+              title="WhatsApp"
+            >
+              <i class="bi bi-whatsapp"></i>
+              <span class="whatsapp-number nav-icon-label">54 803 503</span>
+            </a>
+
+            <a [routerLink]="accountRoute" class="nav-icon-link" [title]="accountLabel">
+              <i class="bi bi-person-fill"></i>
+              <span class="nav-icon-label">{{ accountLabel }}</span>
+            </a>
+            <a routerLink="/cart" class="nav-icon-link position-relative" title="Mon panier">
+              <i class="bi bi-cart-fill"></i>
+              <span class="nav-icon-label">Mon panier</span>
+              @if (cartCount > 0) {
+                <span class="cart-count-badge position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                  {{cartCount}}
+                </span>
+              }
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+       <!-- Bottom Navbar for Categories and Links -->
+      <nav class="navbar navbar-expand-lg navbar-bottom sticky-top">
+        <div class="container-fluid">
+          <!-- Sticky Logo - Visibility controlled by JS -->
+          <a class="navbar-brand sticky-logo me-4" href="#">
+            <span class="logo-letter-b">SQ</span></a
+          >
+
+          <div class="d-flex align-items-center">
+            <!-- "Tous les produits" Button -->
+
+            <div class="dropdown">
+              <button
+                class="btn all-products-btn"
+                type="button"
+                id="productsDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-list"></i>
+                Tous Les Produits
+                <i class="bi bi-chevron-down dropdown-toggle-icon ms-2"></i>
+              </button>
+              <ul
+                class="dropdown-menu products-dropdown-menu"
+                aria-labelledby="productsDropdown"
+              >
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Maison Et Décoration <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Peinture <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Jardin <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Éclairage <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Électricité <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Outillage <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Sanitaire <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Quincaillerie <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Menuiserie <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Plomberie <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#"
+                    >Animalerie <i class="bi bi-chevron-right"></i
+                  ></a>
+                </li>
+                <li><a class="dropdown-item" href="#">Vente Flash</a></li>
+              </ul>
+            </div>
+
+            <!-- Links next to "Tous Les Produits" -->
+            <ul class="navbar-nav d-flex flex-row">
+              @if(user?.role == 'admin'){
+              <li class="nav-item">
+                <a routerLink="dashboard/orders" class="nav-link position-relative d-inline-block">
+                  Ordres
+                  @if (orderCount > 0) {
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" style="font-size: 0.65rem;">
+                      {{orderCount}}
+                    </span>
+                  }
+                </a>
+              </li>
+            }
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nouveautés</a>
+              </li>
+
+            </ul>
+          </div>
+
+          <div class="d-flex ms-auto">
+            <ul class="navbar-nav">
+              @if(user?.role == 'admin'){
+              <li class="nav-item">
+                <a class="nav-link  text-primary" routerLink="/products/ajout">Create Produits</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link  text-primary" routerLink="/carousels/ajout">Create carousels</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link  text-primary" routerLink="/news/ajout">Create News</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-link  text-primary" routerLink="/blogs/ajout">Create Blogs</a>
+              </li>
+            }
+              <li class="nav-item">
+                <a class="nav-link" href="#">Services</a>
+              </li>
+              <!-- "Contact" -->
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </nav>

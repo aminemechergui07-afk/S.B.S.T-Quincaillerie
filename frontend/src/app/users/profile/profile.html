@@ -1,0 +1,82 @@
+<section class="container my-5 py-4">
+  <h2 class="mb-4 fw-bold">Mon Profil Personnel</h2>
+  <div class="row">
+
+    <div class="col-md-3 mb-4">
+      <div class="card shadow-sm border-0 p-3" style="border-radius: 15px;">
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link text-dark fw-bold"><i class="bi bi-person me-2"></i> Informations</a>
+          </li>
+          <li class="nav-item mb-3">
+            <a href="#" class="nav-link text-muted"><i class="bi bi-box-seam me-2"></i> Mes Commandes</a>
+          </li>
+          <hr>
+          <button (click)="logout()" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center gap-2" style="border-radius: 10px;">
+            <i class="bi bi-box-arrow-right"></i> Déconnexion
+          </button>
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="card shadow-sm border-0 p-4" style="border-radius: 15px;">
+        <h4 class="mb-4">Informations Personnelles</h4>
+
+        <form [formGroup]="profileForm" (ngSubmit)="save()">
+          <div class="d-flex align-items-center mb-4 pb-3 border-bottom">
+            <div class="position-relative">
+              <img
+                [src]="users?.image ? 'http://127.0.0.1:5000/images/' + users.image : ''"
+                class="rounded-circle border border-info border-3 p-1 shadow-sm"
+                width="100"
+                height="100"
+                style="object-fit: cover;"
+                alt="Profile"
+              />
+              <label for="avatarUpload" class="btn btn-sm btn-info rounded-circle position-absolute bottom-0 end-0 shadow" style="cursor: pointer; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-camera-fill text-dark"></i>
+              </label>
+              <input type="file" id="avatarUpload" class="d-none" accept="image/png, image/jpeg" (change)="selectImage($event)" />
+            </div>
+            <div class="ms-4">
+              <h5 class="mb-1">Photo de profil</h5>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label class="form-label text-muted fw-semibold">Name</label>
+              <input formControlName="name" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': profileForm.controls['name'].invalid && profileForm.controls['name'].touched}" placeholder="" required>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label class="form-label text-muted fw-semibold">Last Name</label>
+              <input formControlName = "lastName" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched}" placeholder="" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label text-muted fw-semibold">Email</label>
+            <input formControlName="email" type="email" [ngClass]="{'form-control px-3 py-2': true, 'error': profileForm.controls['email'].invalid && profileForm.controls['email'].touched}" placeholder="Votre email" required>
+          </div>
+          <div class="mb-4">
+            <label class="form-label text-muted fw-semibold">Téléphone</label>
+            <input formControlName="tel" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': profileForm.controls['tel'].invalid && profileForm.controls['tel'].touched}" placeholder="Votre tele" required>
+          </div>
+
+            <div class="mb-4">
+                <label class="form-label text-muted fw-semibold">Mot de passe</label>
+                <input formControlName="password" type="password" [ngClass]="{'form-control px-3 py-2': true, 'error': profileForm.controls['password'].invalid && profileForm.controls['password'].touched}" placeholder="edit mot de passe" required>
+              </div>
+
+          <div class="text-end">
+            <button type="submit" class="btn px-5 py-2" style="background-color: var(--primary-color, #ff6600); color: white; border-radius:10px; font-weight:600;">
+              Enregistrer les modifications
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</section>

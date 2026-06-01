@@ -1,0 +1,55 @@
+   <main class="container my-5 news-detail-container">
+      <div class="row">
+
+        <!-- Main Article Column -->
+
+        <div class="col-lg-8">
+
+          <article class="news-article">
+            @for(blog of blogs; track blog._id){
+
+
+
+                <h1 class="news-title display-5 fw-bold mb-3"> {{blog.title}} </h1>
+
+                <div class="news-cover-image mb-5">
+                    <img [src]=" 'http://127.0.0.1:5000/images/'+ blog.image " class="img-fluid rounded shadow-sm w-100" alt="News Cover Image">
+                </div>
+
+                <div class="news-content lead fs-6">
+                    <p class="mb-4"> {{blog.description}} </p>
+
+
+                    <blockquote class="news-quote p-4 my-4 rounded border-start border-4 border-warning bg-light">
+                        <i class="bi bi-quote fs-3 text-warning mb-2 d-block"></i>
+                        <p class="fst-italic mb-0">" {{blog.blockquote}} "</p>
+                    </blockquote>
+
+                </div>
+              }
+
+                <div class="news-tags mt-5 pt-4 border-top">
+                    <span class="fw-bold me-2">Tags:</span>
+                    <a href="#" class="badge bg-secondary text-decoration-none py-2 px-3 me-1">Technologie</a>
+                    <a href="#" class="badge bg-secondary text-decoration-none py-2 px-3 me-1">Smartphones</a>
+                    <a href="#" class="badge bg-secondary text-decoration-none py-2 px-3 me-1">Innovation</a>
+                </div>
+
+                <div class="news-share my-4 py-3 d-flex align-items-center gap-3">
+                    <span class="fw-bold">Partager l'article:</span>
+                    <button class="btn btn-outline-primary btn-sm btn-social"><i class="bi bi-facebook"></i></button>
+                    <button class="btn btn-outline-info btn-sm btn-social text-dark border-info"><i class="bi bi-twitter-x"></i></button>
+                    <button class="btn btn-outline-success btn-sm btn-social"><i class="bi bi-whatsapp"></i></button>
+                    <button class="btn btn-outline-secondary btn-sm btn-social"><i class="bi bi-linkedin"></i></button>
+                </div>
+            </article>
+
+
+
+
+        </div>
+
+
+      </div>
+    </main>
+

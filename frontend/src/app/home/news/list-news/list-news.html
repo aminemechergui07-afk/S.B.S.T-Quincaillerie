@@ -1,0 +1,41 @@
+    <div class="cover from-right" data-delay="100" id="home">
+
+      <div class="container">
+        <h1 class="mt-3 mb-4 fw-bold px-3">Derniers News</h1>
+
+
+
+       @for(new of news; track new._id){
+         <div class="row">
+          @if(user?.role == 'admin'){
+           <div class="d-flex justify-content-center mt-3">
+           <button [routerLink]="['/news/update/' + new._id]" class="btn-action edit" title="Modifier"><i class="bi bi-pencil-fill"></i></button>
+           <button (click)="deleteNews(new._id)" class="btn-action delete" title="Supprimer"><i class="bi bi-trash-fill"></i></button>
+        </div>
+         }
+          <div class="col-lg-5">
+            <div class="news-media">
+              <img
+                [src]=" 'http://127.0.0.1:5000/images/' + new.image "
+                class="w-100 news-media__image"
+                [alt]="new.title"
+              />
+            </div>
+          </div>
+
+
+          <div class="col-lg-7 cover-text">
+            <h1 class="text-dark mt-4 title"> {{new.title}} </h1>
+
+            <p class="text-dark mt4 lead">
+             {{new.description}}
+            </p>
+
+            <button [routerLink]="['/news/detailNew/' , new._id]" class="voir-plus">Voir plus</button>
+          </div>
+        </div>
+       }
+
+
+      </div>
+    </div>

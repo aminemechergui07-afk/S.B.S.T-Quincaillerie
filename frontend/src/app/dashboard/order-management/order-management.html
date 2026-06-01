@@ -1,0 +1,162 @@
+<div class="container-fluid py-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card border-0 shadow-sm rounded-4">
+        <div class="card-body p-4 p-md-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0 fw-bold"><i class="bi bi-box-seam me-2 text-primary"></i>Gestion des Commandes</h2>
+            <button class="btn btn-primary d-none d-md-inline-block"><i class="bi bi-download me-2"></i>Exporter</button>
+          </div>
+
+          <!-- Table -->
+          <div class="table-responsive rounded-3 border">
+            <table class="table table-hover align-middle mb-0">
+              <thead class="table-light text-muted small text-uppercase">
+                <tr>
+                  <th scope="col" class="fw-bold py-3 ps-4">ID Commande</th>
+                  <th scope="col" class="fw-bold py-3">Client</th>
+                  <th scope="col" class="fw-bold py-3">Number Phone</th>
+                  <th scope="col" class="fw-bold py-3">Date</th>
+                  <th scope="col" class="fw-bold py-3">Montant Total</th>
+                  <th scope="col" class="fw-bold py-3 text-center">Statut</th>
+                  <th scope="col" class="fw-bold py-3 text-end pe-4">Actions</th>
+                </tr>
+              </thead>
+              <tbody class="border-top-0">
+                @for(order of orders; track order._id){
+
+            <div class="hero-slide__actions">
+
+            <button
+              (click)="deleteOrder(order._id)"
+              class="btn-action delete"
+              title="Supprimer"
+              aria-label="Supprimer le carousel"
+            >
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+
+                <tr class="orders-row">
+                  <td class="ps-4"><span class="fw-bold text-primary">#{{order._id}}</span></td>
+                  <td><span class="fw-medium text-dark">{{order.userId?.name}} {{order.userId?.lastName}}</span></td>
+                  <td class="text-muted">{{order.userId.tel}}</td>
+                  <td class="text-muted">{{order.createdAt | date:'dd/MM/yyyy'}}</td>
+                  <td class="fw-bold fs-6">{{order.totalAmount}} TND</td>
+                  <td class="text-center">
+                    @switch (order.status) {
+                      @case ('En attente') {
+                        <span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split me-1"></i>En attente</span>
+                      }
+                      @case ('Expédié') {
+                        <span class="badge bg-primary"><i class="bi bi-truck me-1"></i>Expédié</span>
+                      }
+                      @case ('Livré') {
+                        <span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Livré</span>
+                      }
+                      @case ('Annulé') {
+                        <span class="badge bg-danger"><i class="bi bi-x-circle me-1"></i>Annulé</span>
+                      }
+                    }
+                  </td>
+                  <td class="text-end pe-4">
+                    <div class="dropdown">
+                      <button class="btn btn-light rounded-circle action-btn shadow-sm border" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-three-dots-vertical text-secondary"></i>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2 rounded-3">
+                        <li><h6 class="dropdown-header text-uppercase fs-7 fw-bold">Changer le statut</h6></li>
+                        <li><a class="dropdown-item py-2" style="cursor: pointer;" (click)="changeStatus(order._id, 'En attente')"><span class="d-inline-block rounded-circle bg-warning me-2" style="width:8px;height:8px;"></span>En attente</a></li>
+                        <li><a class="dropdown-item py-2" style="cursor: pointer;" (click)="changeStatus(order._id, 'Expédié')"><span class="d-inline-block rounded-circle bg-primary me-2" style="width:8px;height:8px;"></span>Expédié</a></li>
+                        <li><a class="dropdown-item py-2" style="cursor: pointer;" (click)="changeStatus(order._id, 'Livré')"><span class="d-inline-block rounded-circle bg-success me-2" style="width:8px;height:8px;"></span>Livré</a></li>
+                        <li><a class="dropdown-item text-danger py-2" style="cursor: pointer;" (click)="changeStatus(order._id, 'Annulé')"><span class="d-inline-block rounded-circle bg-danger me-2" style="width:8px;height:8px;"></span>Annuler</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item py-2 fw-medium text-primary" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#orderDetailsModal" (click)="selectedOrder = order"><i class="bi bi-eye me-2"></i>Voir les détails</a></li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+                } @empty {
+                <tr>
+                  <td colspan="6" class="text-center py-5 text-muted">
+                    <i class="bi bi-inbox fs-1 d-block mb-3 text-secondary opacity-50"></i>
+                    <p class="fs-5 fw-medium m-0">Aucune commande n'est disponible.</p>
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Détails de la Commande -->
+<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header border-bottom-0 pb-0">
+        <h5 class="modal-title fw-bold" id="orderDetailsModalLabel">
+          <i class="bi bi-receipt me-2 text-primary"></i>Détails de la Commande
+          <span class="text-muted ms-1" style="font-size: 0.9rem;" *ngIf="selectedOrder">#{{selectedOrder._id}}</span>
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body p-4" *ngIf="selectedOrder">
+        <!-- Infos Client & Livraison -->
+        <div class="row mb-4">
+          <div class="col-sm-6 mb-3 mb-sm-0">
+            <h6 class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.75rem;">Client</h6>
+            <div class="fw-medium text-dark">{{selectedOrder.userId?.name}} {{selectedOrder.userId?.lastName}}</div>
+            <div class="text-muted small">{{selectedOrder.userId?.email}}</div>
+            <div class="text-muted small"><i class="bi bi-telephone me-1"></i>{{selectedOrder.userId?.tel || 'Non renseigné'}}</div>
+          </div>
+          <div class="col-sm-6">
+            <h6 class="text-uppercase text-muted fw-bold mb-2" style="font-size: 0.75rem;">Adresse de Livraison</h6>
+            <div class="text-dark small border p-2 rounded bg-light">
+              {{selectedOrder.shippingDetails?.address || 'Pas encore renseignée'}}
+            </div>
+          </div>
+        </div>
+
+        <!-- Liste des Produits -->
+        <h6 class="text-uppercase text-muted fw-bold mb-3 border-bottom pb-2" style="font-size: 0.75rem;">Produits commandés</h6>
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <tbody class="border-top-0">
+              @for(item of selectedOrder.items; track $index){
+                <tr>
+                  <td style="width: 60px;">
+                    <img *ngIf="item.productId?.images?.length" [src]="'http://127.0.0.1:5000/images/' + item.productId.images[0]" class="img-fluid rounded" alt="produit" style="max-height: 50px;">
+                  </td>
+                  <td>
+                    <div class="fw-bold text-dark">{{item.productId?.name || 'Produit Inconnu'}}</div>
+                  </td>
+                  <td class="text-center">
+                    <span class="badge bg-light text-dark border">x {{item.quantity}}</span>
+                  </td>
+                  <td class="text-end fw-bold text-primary">
+                    {{item.price * item.quantity}} TND
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer border-top-0 pt-0 justify-content-between p-4" *ngIf="selectedOrder">
+        <div align="left">
+          <span class="text-muted d-block small">Date de la commande :</span>
+          <span class="fw-medium">{{selectedOrder.createdAt | date:'dd/MM/yyyy HH:mm'}}</span>
+        </div>
+        <div align="right">
+          <span class="text-muted d-block small">Montant Total :</span>
+          <h4 class="fw-bold mb-0 text-primary">{{selectedOrder.totalAmount}} TND</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

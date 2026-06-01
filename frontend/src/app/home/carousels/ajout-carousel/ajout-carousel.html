@@ -1,0 +1,36 @@
+    <section class="container my-5 py-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm border-0 p-4" style="border-radius:12px; border-top: 5px solid var(--primary-color) !important;">
+            <h2 class="mb-4 fw-bold"><i class="bi bi-images me-2"></i>Ajouter un Élément au Carousel</h2>
+            <form [formGroup]="carouselForm" (ngSubmit)="save()">
+              <div class="mb-3">
+                <label class="form-label fw-semibold text-muted">Titre</label>
+                <input formControlName="title" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': carouselForm.controls['title'].invalid && carouselForm.controls['title'].touched}" placeholder="Ex: iPhone 17 Pro Max" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label fw-semibold text-muted">Texte Secondaire</label>
+                <input formControlName="text" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': carouselForm.controls['text'].invalid && carouselForm.controls['text'].touched}" placeholder="Ex: POUR TOUS VOS PROJETS" required>
+              </div>
+              <div class="mb-4">
+                <label class="form-label fw-semibold text-muted">Image de fond</label>
+                <input (change)="selectImage($event)" type="file" class="form-control px-3 py-2" accept="image/*" required>
+                <div class="form-text">Format recommandé: 1920x600 pixels (Haute résolution).</div>
+              </div>
+              <div class="mb-4 form-check">
+                <input type="checkbox" class="form-check-input" id="activeSlide" checked>
+                <label class="form-check-label text-muted fw-semibold" for="activeSlide">Définir comme slide actif (premier)</label>
+              </div>
+              <button [disabled]="carouselForm.invalid || !image" type="submit" class="btn w-100 py-2 btn-add-to-cart" style="background-color: var(--primary-color); color: white; font-weight:600; border-radius:30px;">
+                <i class="bi bi-plus-circle me-2"></i> Ajouter au Carousel
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+

@@ -1,0 +1,44 @@
+    <section class="container my-5 py-4">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow-sm border-0 p-4" style="border-radius:12px; border-top: 5px solid var(--primary-color) !important;">
+            <h2 class="mb-4 fw-bold"><i class="bi bi-box-seam me-2"></i>Ajouter un Produit</h2>
+            <form [formGroup]="productForm" (ngSubmit)="save()">
+              <div class="mb-3">
+                <label class="form-label fw-semibold text-muted">Nom du Produit</label>
+                <input formControlName="name" type="text" [ngClass]="{'form-control px-3 py-2': true, 'error': productForm.controls['name'].invalid && productForm.controls['name'].touched}" placeholder="Entrez le nom du produit" required>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-semibold text-muted">Prix (TND)</label>
+                  <div class="input-group">
+                    <input formControlName="prix" type="text" step="0.01" [ngClass]="{'form-control px-3 py-2': true, 'error': productForm.controls['prix'].invalid && productForm.controls['prix'].touched}" placeholder="0.00" required>
+                    <span class="input-group-text">TND</span>
+                  </div>
+                </div>
+              </div>
+            <div class="row mb-4">
+            <label for="projectproject" class="col-form-label col-lg-2">Status</label>
+            <div class="col-lg-10">
+              <select formControlName="status" class="form-control m-2">
+                <option value="Nouveau">Nouveau</option>
+                <option value="Promo">Promo</option>
+              </select>
+            </div>
+          </div>
+              <div class="mb-4">
+                <label class="form-label fw-semibold text-muted">Image du Produit</label>
+                <input (change)="selectImage($event)" multiple  type="file" class="form-control px-3 py-2" accept="image/*" required>
+              </div>
+              <div class="mb-4">
+                <label class="form-label fw-semibold text-muted">Description</label>
+                <textarea formControlName="description" [ngClass]="{'form-control px-3 py-2': true, 'error': productForm.controls['description'].invalid && productForm.controls['description'].touched}" rows="3" placeholder="Description du produit..."></textarea>
+              </div>
+              <button [disabled]="productForm.invalid || !images" type="submit" class="btn w-100 py-2 btn-add-to-cart" style="background-color: var(--primary-color); color: white; font-weight:600; border-radius:30px;">
+                <i class="bi bi-plus-circle me-2"></i> Ajouter au catalogue
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>

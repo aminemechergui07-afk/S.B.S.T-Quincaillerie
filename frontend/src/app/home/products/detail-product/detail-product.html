@@ -1,0 +1,63 @@
+    <main class="container my-5 product-detail-container">
+      <div class="row gx-5" *ngIf="products">
+        <!-- Image Gallery Column -->
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <div class="product-gallery">
+            <!-- Main Large Image with Zoom -->
+            <div class="main-image-wrapper zoom-container mb-3" id="zoomContainer">
+              <img [src]=" 'http://127.0.0.1:5000/images/' + selectedImage " alt="iPhone 17" class="img-fluid rounded main-product-image" id="mainImage">
+            </div>
+
+            <!-- Thumbnail Gallery -->
+<div class="thumbnail-gallery d-flex gap-2 thumbnail-scroll">
+        <img *ngFor="let img of products.images"
+             [src]="'http://127.0.0.1:5000/images/' + img"
+             alt="Thumbnail"
+             class="img-fluid rounded thumbnail"
+             [class.active]="selectedImage === img"
+             (click)="changeImage(img)"
+             style="cursor: pointer; width: 80px; height: 80px; object-fit: cover;">
+      </div>
+          </div>
+        </div>
+
+        <!-- Product Info Column -->
+        <div class="col-lg-6">
+          <div class="product-info ps-lg-4">
+            <span class="text-muted text-uppercase small fw-bold tracking-wide">SBST-PRO</span>
+            <h1 class="display-5 fw-bold mb-2"> {{products.name}} </h1>
+
+            <div class="d-flex align-items-center mb-3">
+              <span class="badge bg-success rounded-pill px-3 py-2 me-3"><i class="bi bi-check-circle-fill me-1"></i> En Stock</span>
+
+            </div>
+
+            <div class="price-block mb-4">
+              <h2 class="price-display fw-bold mb-0">{{products.prix}} TND</h2>
+              <p class="text-muted small">Taxes incluses</p>
+            </div>
+
+            <p class="product-description lead fs-6 mb-4"> {{products.description}} </p>
+
+
+
+            <div class="add-to-cart-section py-4 border-top mt-2">
+              <div class="row align-items-center gx-3">
+
+                <div class="col mt-4">
+                  <button (click)="addToCart(products)" class="btn btn-primary w-100 btn-add-to-cart-lg d-flex align-items-center justify-content-center py-3">
+                    <i class="bi bi-cart-plus-fill me-2 fs-5"></i>
+                    <span class="fw-bold fs-5">Ajouter au panier</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <app-related-products></app-related-products>
+      <app-product-reviews [product]="id"></app-product-reviews>
+
+    </main>

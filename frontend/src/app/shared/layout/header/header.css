@@ -1,0 +1,18 @@
+.cart-count-badge {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.2rem;
+  min-height: 1.2rem;
+  line-height: 1;
+  z-index: 2;
+}
+
+@media (max-width: 991.98px) {
+  .cart-count-badge {
+    top: 0.15rem !important;
+    left: auto !important;
+    right: -0.25rem;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,66 @@
+    <section class="container-fluid mt-5 fouk p-0 m-0 list-product-section">
+      <h2 class="mb-4 fw-bold px-3" data-delay="0">Produits en vedette</h2>
+
+      <div class="row g-0 row-cols-md-3 row-cols-lg-6 g-3 mb-4 list-product-grid">
+
+         @for(product of products; track product._id){
+        <div class="col product-list-column">
+          <div
+            class="card product-card"
+            data-delay="200"
+            id="animatedCard"
+          >
+            <img [routerLink]="['/products/detailProduct/'+ product._id]"
+
+              [src]=" 'http://127.0.0.1:5000/images/' + product.images[0] "
+              class="card-img-top"
+              [alt]="product.name"
+            />
+            <span class="badge position-absolute top-0 start-0 m-3">
+
+                  @switch (product.status) {
+                    @case ('Nouveau') {
+                      <span class="badge bg-danger"> Nouveau </span>
+                    }
+                    @case ('Promo') {
+                      <span class="badge bg-success"> Promo </span>
+                    }
+                  }
+
+            </span>
+            @if(user?.role == 'admin'){
+            <div class="card-actions-overlay">
+              <button [routerLink]="['/products/update/' + product._id]" class="btn-action edit" title="Modifier"><i class="bi bi-pencil-fill"></i></button>
+              <button (click)="deleteProduct(product._id)" class="btn-action delete" title="Supprimer"><i class="bi bi-trash-fill"></i></button>
+            </div>
+          }
+            <div  class="card-body">
+              <h5 class="card-title"> {{product.name}} </h5>
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <span class="text-muted small">Marque: SBST-PRO</span>
+                <span class="badge bg-success">En Stock</span>
+              </div>
+              <div
+                class="d-flex justify-content-between align-items-center mt-3"
+              >
+                <h4 class="fw-bold mb-0" style="color: var(--primary-color)">
+                  {{product.prix}} TND
+                </h4>
+                <a
+                (click)="addToCart(product)"
+                  class="btn btn-add-to-cart"
+                  title="Ajouter au panier"
+                >
+                  <i class="bi bi-cart-plus-fill"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+         }
+
+
+      </div>
+    </section>
